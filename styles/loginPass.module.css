@@ -1,14 +1,40 @@
-.header{
-    width: 100%;
-    text-align: center;
-    margin-top: 10px;
+.header {
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
 }
-.maincontainer{
-    width: 40%;
-    margin: auto;
-    margin-top: 4px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: aqua;
+.maincontainer {
+  width: 25%;
+  margin: auto;
+  margin-top: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+}
+.input {
+  margin-top: 15px;
+}
+.button {
+  margin-top: 15px;
+  width: 100%;
+  height: 35px;
+  background-color: #0c1cdb;
+  color: white;
+  border-radius: 5%;
+}
+.button:hover {
+  background-color: #d7dbdd;
+  color: #0c1cdb;
+}
+.navlink {
+  margin-top: 15px;
+  width: 100%;
+  height: 35px;
+  background-color: #3168cf;
+  color: white;
+  border: 2px solid black;
+  border-radius: 5%;
+  text-align: center;
 }
