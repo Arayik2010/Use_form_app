@@ -40,6 +40,8 @@ export default function Step2() {
   const onSubmit = (data) => {
     router.push("/posts/result");
     setValues(data);
+    router.push("/posts/result");
+    setValues(data);
   };
 
   const normalizePhoneNumber = (value) => {
@@ -48,7 +50,8 @@ export default function Step2() {
       return value;
     }
     return phoneNumber.formatInternational();
-  };
+  }
+
   return (
     <div>
       <MainContainer>
