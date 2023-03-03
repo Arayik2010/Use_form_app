@@ -47,7 +47,7 @@ export default function Result() {
                         {entries.map((entry) => (
                             <TableRow key={entry[0]}>
                                 <TableCell>{entry[0]}</TableCell>
-                                <TableCell align='right'>{entry[1].toString()}</TableCell>
+                                <TableCell align='right'>{entry[1]?.toString()}</TableCell>
                             </TableRow>
                         ))}
 
