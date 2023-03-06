@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { useData } from "@/dataContext";
 import styles from "@/styles/loginPass.module.css";
+import { PrimeryButton } from "./PrimeryButton";
 
 export default function Result() {
   const { data } = useData();
@@ -19,7 +20,6 @@ export default function Result() {
 
   const onSubmit = async () => {
     const formData = new FormData();
-  
 
     entries.forEach((entry) => {
       formData.append(entry[0], entry[1]);
@@ -32,44 +32,36 @@ export default function Result() {
     if (res.status === 200) {
       console.log("Great job", "success");
     }
-}
-    return (
+  };
+  return (
+    <MainContainer>
+      <h2>Form Values</h2>
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Field</TableCell>
+              <TableCell>Values</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {entries.map((entry) => (
+              <TableRow key={entry[0]}>
+                <TableCell>{entry[0]}</TableCell>
+                <TableCell align="right">{entry[1]?.toString()}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+        <PrimeryButton name="Send" onClick={onSubmit()} />
+        <div className={styles.navlink}>
+        <Link  href="/">
+          Start over
+        </Link>
 
-
-        <MainContainer>
-
-            <h2>Form Values</h2>
-            <TableContainer component={Paper}>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>
-                                Field
-                            </TableCell>
-                            <TableCell>
-                                Values
-                            </TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {entries.map((entry) => (
-                            <TableRow key={entry[0]}>
-                                <TableCell>{entry[0]}</TableCell>
-                                <TableCell align='right'>{entry[1]?.toString()}</TableCell>
-                            </TableRow>
-                        ))}
-
-                    </TableBody>
-                </Table>
-
-            </TableContainer>
-
-      <button className={styles.button} onClick={onSubmit()}>
-        Send
-      </button>
-      <Link className={styles.navlink} href="/">
-        Start over
-      </Link>
+        </div>
+        
+      </TableContainer>
     </MainContainer>
   );
 }

@@ -1,14 +1,13 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { MainContainer } from "./mainContainer";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useRouter } from "next/router";
 import { useData } from "@/dataContext";
-import Input from "./Input";
 import styles from "@/styles/loginPass.module.css";
-import { TextField } from "@mui/material";
 import { PrimeryButton } from "./PrimeryButton";
+import InputGroup from "./InputGroup";
 
 const schema = yup
   .object()
@@ -47,38 +46,26 @@ export default function Step1() {
     <MainContainer>
       <h2>Stap1</h2>
       <form className="validation" onSubmit={handleSubmit(onSubmit)}>
-      {focused? <label className={styles.control_label}>Last Name</label> :''}
-
-        <Input
+        <InputGroup
           register={{ ...register("firstName") }}
           id="firstName"
           type="text"
           label="First Name"
           name="firstName"
-          placeholder="First Name"
-          onFocus={() => setFocused(true)}
-          onBlur ={() => setFocused(false)}
         />
+        <p className={styles.error_text}>{errors?.firstName?.message}</p>
 
-        <p   className={styles.error_text}>{errors?.firstName?.message}</p>
-        {focused? <label className={styles.control_label}>Last Name</label> :''}
-
-        
-
-        <Input
+        <InputGroup
           register={{ ...register("lastName") }}
           id="lastName"
           type="text"
           label="Last Name"
           name="lastName"
-          placeholder="Last Name"
-          onFocus={() => setFocused(true)}
-          onBlur ={() => setFocused(false)}
         />
 
         <p className={styles.error_text}>{errors?.lastName?.message}</p>
 
-       <PrimeryButton name='Next'/>
+        <PrimeryButton name="Next" />
       </form>
     </MainContainer>
   );

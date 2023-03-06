@@ -8,6 +8,9 @@ import { Checkbox, FormControlLabel } from "@mui/material";
 import parsePhoneNumberFromString from "libphonenumber-js";
 import { useData } from "@/dataContext";
 import Input from "./Input";
+import styles from "@/styles/loginPass.module.css";
+import InputGroup from "./InputGroup";
+import { PrimeryButton } from "./PrimeryButton";
 
 const schema = yup.object().shape({
   email: yup
@@ -28,20 +31,18 @@ export default function Step2() {
     defaultValues: {
       email: data.email,
       hasPhone: data.hasPhone,
-      phoneNumber:data.phoneNumber
+      phoneNumber: data.phoneNumber,
     },
     mode: "onBlur",
     resolver: yupResolver(schema),
   });
   const router = useRouter();
   const hasPhone = watch("hasPhone");
-  
-  
+
   const onSubmit = (data) => {
     router.push("/posts/result");
     setValues(data);
-    router.push("/posts/result");
-    setValues(data);
+    
   };
 
   const normalizePhoneNumber = (value) => {
@@ -50,25 +51,21 @@ export default function Step2() {
       return value;
     }
     return phoneNumber.formatInternational();
-  }
+  };
 
   return (
     <div>
       <MainContainer>
         <h2>Stap 2</h2>
-        <form
-          noValidate
-          className="validation"
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <Input
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <InputGroup
             register={{ ...register("email") }}
             id="email"
             type="email"
             label="Email"
             name="email"
           />
-          <p>{errors?.email?.message}</p>
+          <p className={styles.error_text}>{errors?.email?.message}</p>
 
           <FormControlLabel
             control={
@@ -78,23 +75,25 @@ export default function Step2() {
                 color="primary"
               />
             }
-            label="Du you have a phone"
           />
+          <label className={styles.checkbox_label}>Du you have a phone</label>
           {hasPhone && (
-          <Input
-            register={{ ...register("phoneNumber",{ onChange:(e) => {
-              e.target.value = normalizePhoneNumber(e.target.value);
-            }}) }}
-            id="phoneNumber"
-            type="tel"
-            label="Phone Number"
-            name="phoneNumber"
-           
-          />
+            <InputGroup
+              register={{
+                ...register("phoneNumber", {
+                  onChange: (e) => {
+                    e.target.value = normalizePhoneNumber(e.target.value);
+                  },
+                }),
+              }}
+              id="phoneNumber"
+              type="tel"
+              label="Phone Number"
+              name="phoneNumber"
+            />
           )}
-     
 
-          <input type="submit" />
+          <PrimeryButton name="Next" />
         </form>
       </MainContainer>
     </div>
